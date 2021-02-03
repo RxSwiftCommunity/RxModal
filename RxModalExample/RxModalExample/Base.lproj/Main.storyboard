@@ -18,11 +18,14 @@
                         <subviews>
                             <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="DOr-z5-edE">
                                 <rect key="frame" x="0.0" y="646" width="414" height="216"/>
+                                <connections>
+                                    <outlet property="dataSource" destination="BYZ-38-t0r" id="M1w-ho-qbT"/>
+                                    <outlet property="delegate" destination="BYZ-38-t0r" id="saE-ya-pTd"/>
+                                </connections>
                             </pickerView>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" editable="NO" textAlignment="natural" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Y07-KI-biD">
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="602"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                                <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
                                 <color key="textColor" systemColor="labelColor"/>
                                 <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
@@ -31,7 +34,11 @@
                                 <rect key="frame" x="0.0" y="602" width="414" height="44"/>
                                 <items>
                                     <barButtonItem style="plain" systemItem="flexibleSpace" id="AbF-b3-YdN"/>
-                                    <barButtonItem title="Start" id="PJs-8d-93f"/>
+                                    <barButtonItem title="Start" id="PJs-8d-93f">
+                                        <connections>
+                                            <action selector="startFlow:" destination="BYZ-38-t0r" id="EAo-9b-fv9"/>
+                                        </connections>
+                                    </barButtonItem>
                                 </items>
                             </toolbar>
                         </subviews>
@@ -50,6 +57,10 @@
                             <constraint firstItem="0u5-CP-wF5" firstAttribute="top" secondItem="Y07-KI-biD" secondAttribute="bottom" id="tFc-BJ-4nc"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="flowOutputTextView" destination="Y07-KI-biD" id="eM4-3t-JLh"/>
+                        <outlet property="flowPicker" destination="DOr-z5-edE" id="5aR-Tm-lyD"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
