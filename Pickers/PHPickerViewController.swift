@@ -12,9 +12,9 @@ import RxCocoa
 
 extension RxModal {
     @available(iOS 14, *)
-    public static func mediaPicker(configuration: PHPickerConfiguration, presenter: Presenter = .keyWindow) -> Single<[PHPickerResult]> {
-        PickerViewControllerCoordinator.present(using: presenter) { delegate in
-            PHPickerViewController(configuration: configuration)..{
+    public static func photoPicker(presenter: Presenter = .keyWindow, configuration: @escaping (inout PHPickerConfiguration) -> Void = { _ in }) -> Single<[PHPickerResult]> {
+        PHPickerViewControllerCoordinator.present(using: presenter) { delegate in
+            PHPickerViewController(configuration: PHPickerConfiguration() .. configuration)..{
                 $0.delegate = delegate
             }
         } sequence: {
@@ -24,7 +24,7 @@ extension RxModal {
 }
 
 @available(iOS 14, *)
-private class PickerViewControllerCoordinator: RxModalCoordinator, PHPickerViewControllerDelegate {
+private class PHPickerViewControllerCoordinator: RxModalCoordinator, PHPickerViewControllerDelegate {
     required init() {}
 
     let pickerResults = PublishSubject<[PHPickerResult]>()

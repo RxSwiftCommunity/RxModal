@@ -15,13 +15,28 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
     
     // MARK: - Flows
     
-    let flows: [Flow] = [
-        Flow(title: "Media Picker") {
-            RxModal.mediaPicker(configuration: PHPickerConfiguration()..{
-                $0.selectionLimit = 3
-            })
+    lazy var flows: [Flow] = {
+        var flows = [
+            Flow(title: "Media Picker") {
+                RxModal.mediaPicker {
+                    $0.allowsPickingMultipleItems = true
+                }.map(\.items)
+            },
+        ]
+        
+        if #available(iOS 14, *) {
+            flows.append(
+                Flow(title: "Photo Picker") {
+                    RxModal.photoPicker {
+                        $0.selectionLimit = 3
+                    }
+                }
+            )
         }
-    ]
+        
+        return flows
+    }()
+    
 
     var selectedFlow: Flow {
         flows[flowPicker.selectedRow(inComponent: 0)]
