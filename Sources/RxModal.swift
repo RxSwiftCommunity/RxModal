@@ -15,5 +15,6 @@ public enum RxModal {
 
 public enum RxModalError: Error {
     case missingPresenter
+    case unsupported
     case authorizationDenied(Any.Type)
 }

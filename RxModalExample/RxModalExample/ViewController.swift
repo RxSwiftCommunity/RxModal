@@ -22,6 +22,18 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
                     $0.allowsPickingMultipleItems = true
                 }.map(\.items)
             },
+            Flow(title: "Mail Composer") {
+                RxModal.mailComposer {
+                    $0.setToRecipients(["rxmodal@rxswiftcommunity.org"])
+                    $0.setSubject("RxModal")
+                    $0.setMessageBody("""
+                    Hey,
+
+                    This library is awesome!
+                    Thanks :) 
+                    """, isHTML: false)
+                }
+            },
         ]
         
         if #available(iOS 14, *) {
