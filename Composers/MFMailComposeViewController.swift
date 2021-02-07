@@ -1,6 +1,6 @@
 //
 //  MFMailComposeViewController.swift
-//  Pods-RxModalExample
+//  RxModal
 //
 //  Created by Jérôme Alves on 06/02/2021.
 //

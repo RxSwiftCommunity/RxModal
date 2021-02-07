@@ -28,10 +28,19 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
                     $0.setSubject("RxModal")
                     $0.setMessageBody("""
                     Hey,
-
                     This library is awesome!
                     Thanks :) 
                     """, isHTML: false)
+                }
+            },
+            Flow(title: "Message Composer") {
+                RxModal.messageComposer {
+                    $0.recipients = ["0639981337"]
+                    $0.body = """
+                    Hey,
+                    This library is awesome!
+                    Thanks :)
+                    """
                 }
             },
         ]
@@ -114,6 +123,7 @@ struct Flow {
         self.title = title
         self.source = source()
             .asObservable()
+            .map { String(rxModalDescribing: $0) }
             .materialize()
             .map { ".\($0)" }
     }
