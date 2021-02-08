@@ -15,8 +15,35 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
     
     // MARK: - Flows
     
-    lazy var flows: [Flow] = {
+    enum AlertResult {
+        case delete, cancel
+    }
+
+    private lazy var flows: [Flow] = {
         var flows = [
+            Flow(title: "Alert") {
+                RxModal.alert(
+                    AlertResult.self,
+                    title: "Delete Item",
+                    message: "Are you sure you want to delete something?",
+                    actions: [
+                        .cancel(title: "Cancel", mapTo: .cancel),
+                        .destructive(title: "Delete", mapTo: .delete)
+                    ]
+                )
+            },
+            Flow(title: "Action Sheet") {
+                RxModal.actionSheet(
+                    AlertResult.self,
+                    source: .barButtonItem(startBarButtonItem),
+                    title: "Delete Item",
+                    message: "Are you sure you want to delete something?",
+                    actions: [
+                        .cancel(title: "Cancel", mapTo: .cancel),
+                        .destructive(title: "Delete", mapTo: .delete)
+                    ]
+                )
+            },
             Flow(title: "Media Picker") {
                 RxModal.mediaPicker {
                     $0.allowsPickingMultipleItems = true
@@ -90,6 +117,8 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
     }
     
     // MARK: - Flow Picker
+
+    @IBOutlet weak var startBarButtonItem: UIBarButtonItem!
 
     @IBOutlet weak var flowPicker: UIPickerView!
     

@@ -58,6 +58,7 @@ extension MessageComposeResult: RxModalCustomStringConvertible {
 
 #if canImport(MediaPlayer)
 import MediaPlayer
+@available(iOS 9.3, *)
 extension MPMediaLibraryAuthorizationStatus: RxModalCustomStringConvertible {
     public var rxModalDescription: String {
         switch self {

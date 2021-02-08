@@ -11,11 +11,15 @@ public struct Presenter {
     private let get: () -> UIViewController?
     
     public static let keyWindow = Presenter {
-        let scenes = UIApplication.shared.connectedScenes.compactMap { $0 as? UIWindowScene }
-        assert(scenes.count <= 1, "Several connected scenes. You probably want to use a more specific presenter.")
-        let windows = scenes.first?.windows.filter { $0.isKeyWindow } ?? []
-        assert(windows.count <= 1, "Several windows found in the scene. You probably want to use a more specific presenter.")
-        return windows.first?.rootViewController
+        if #available(iOS 13.0, *) {
+            let scenes = UIApplication.shared.connectedScenes.compactMap { $0 as? UIWindowScene }
+            assert(scenes.count <= 1, "Several connected scenes. You probably want to use a more specific presenter.")
+            let windows = scenes.first?.windows.filter { $0.isKeyWindow } ?? []
+            assert(windows.count <= 1, "Several windows found in the scene. You probably want to use a more specific presenter.")
+            return windows.first?.rootViewController
+        } else {
+            return UIApplication.shared.keyWindow?.rootViewController
+        }
     }
     
     public static func window(_ window: UIWindow?) -> Presenter {
