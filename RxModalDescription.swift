@@ -27,13 +27,13 @@ extension MFMailComposeResult: RxModalCustomStringConvertible {
     public var rxModalDescription: String {
         switch self {
         case .cancelled:
-            return ".cancelled"
+            return "cancelled"
         case .saved:
-            return ".saved"
+            return "saved"
         case .sent:
-            return ".sent"
+            return "sent"
         case .failed:
-            return ".failed"
+            return "failed"
         @unknown default:
             return "@unknown"
         }
@@ -44,11 +44,11 @@ extension MessageComposeResult: RxModalCustomStringConvertible {
     public var rxModalDescription: String {
         switch self {
         case .cancelled:
-            return ".cancelled"
+            return "cancelled"
         case .sent:
-            return ".sent"
+            return "sent"
         case .failed:
-            return ".failed"
+            return "failed"
         @unknown default:
             return "@unknown"
         }
@@ -63,13 +63,13 @@ extension MPMediaLibraryAuthorizationStatus: RxModalCustomStringConvertible {
     public var rxModalDescription: String {
         switch self {
         case .notDetermined:
-            return ".notDetermined"
+            return "notDetermined"
         case .denied:
-            return ".denied"
+            return "denied"
         case .restricted:
-            return ".restricted"
+            return "restricted"
         case .authorized:
-            return ".authorized"
+            return "authorized"
         @unknown default:
             return "@unknown"
         }
