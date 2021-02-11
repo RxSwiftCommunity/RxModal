@@ -1,0 +1,16 @@
+{
+  "object": {
+    "pins": [
+      {
+        "package": "Splash",
+        "repositoryURL": "https://github.com/JohnSundell/Splash",
+        "state": {
+          "branch": null,
+          "revision": "81de0389558ad40579027735841593b21a511fa8",
+          "version": "0.15.0"
+        }
+      }
+    ]
+  },
+  "version": 1
+}

@@ -11,13 +11,15 @@ import RxSwift
 public struct Dialog<T> {
     public let title: String?
     public let message: String?
+    public let textFields: [DialogTextField]
     public let actions: [DialogAction<T>]
 
-    public init(title: String? = nil, message: String? = nil, actions: [DialogAction<T>]) {
+    public init(title: String? = nil, message: String? = nil, textFields: [DialogTextField] = [], actions: [DialogAction<T>]) {
         assert(actions.isEmpty == false, "Must have at least one action")
 
         self.title = title
         self.message = message
+        self.textFields = textFields
         self.actions = actions
     }
 }
@@ -28,13 +30,20 @@ public enum DialogActionStyle {
     case destructive
 }
 
+public struct DialogTextField {
+    internal let configuration: (UITextField) -> ()
+    public init(configuration: @escaping (UITextField) -> () = { _ in }) {
+        self.configuration = configuration
+    }
+}
+
 public struct DialogAction<T> {
     public let title: String
     public let style: DialogActionStyle
-    public let onNext: Observable<T>
+    public let onNext: ([UITextField]) -> Observable<T>
     public let isPreferred: Bool
 
-    public init(title: String, style: DialogActionStyle, onNext: Observable<T>, isPreferred: Bool = false) {
+    public init(title: String, style: DialogActionStyle, onNext: @escaping ([UITextField]) -> Observable<T>, isPreferred: Bool = false) {
         self.title = title
         self.style = style
         self.onNext = onNext
@@ -50,21 +59,49 @@ public struct DialogAction<T> {
         )
     }
 
-    // MARK: - Observables
+    // MARK: - flatMap with TextFields
+
+    public static func `default`<O: ObservableConvertibleType>(title: String, flatMap observable: @escaping ([UITextField]) -> O) -> DialogAction<T> where O.Element == T {
+        DialogAction(title: title, style: .default, onNext: { observable($0).asObservable() })
+    }
+
+    public static func cancel<O: ObservableConvertibleType>(title: String, flatMap observable: @escaping ([UITextField]) -> O) -> DialogAction<T> where O.Element == T {
+        DialogAction(title: title, style: .cancel, onNext: { observable($0).asObservable() })
+    }
+
+    public static func destructive<O: ObservableConvertibleType>(title: String, flatMap observable: @escaping ([UITextField]) -> O) -> DialogAction<T> where O.Element == T {
+        DialogAction(title: title, style: .destructive, onNext: { observable($0).asObservable() })
+    }
+
+    // MARK: -  flatMapTo without TextFields
 
     public static func `default`<O: ObservableConvertibleType>(title: String, flatMapTo observable: O) -> DialogAction<T> where O.Element == T {
-        DialogAction(title: title, style: .default, onNext: observable.asObservable())
+        DialogAction(title: title, style: .default, onNext: { _ in observable.asObservable() })
     }
 
     public static func cancel<O: ObservableConvertibleType>(title: String, flatMapTo observable: O) -> DialogAction<T> where O.Element == T {
-        DialogAction(title: title, style: .cancel, onNext: observable.asObservable())
+        DialogAction(title: title, style: .cancel, onNext: { _ in observable.asObservable() })
     }
 
     public static func destructive<O: ObservableConvertibleType>(title: String, flatMapTo observable: O) -> DialogAction<T> where O.Element == T {
-        DialogAction(title: title, style: .destructive, onNext: observable.asObservable())
+        DialogAction(title: title, style: .destructive, onNext: { _ in observable.asObservable() })
     }
 
-    // MARK: - Values
+    // MARK: -  map with TextFields
+
+    public static func `default`(title: String, map value: @escaping ([UITextField]) -> T) -> DialogAction<T> {
+        .default(title: title, flatMap: { Observable.just(value($0)) })
+    }
+
+    public static func cancel(title: String, map value: @escaping ([UITextField]) -> T) -> DialogAction<T> {
+        .cancel(title: title, flatMap: { Observable.just(value($0)) })
+    }
+
+    public static func destructive(title: String, map value: @escaping ([UITextField]) -> T) -> DialogAction<T> {
+        .destructive(title: title, flatMap: { Observable.just(value($0)) })
+    }
+
+    // MARK: -  mapTo without TextFields
 
     public static func `default`(title: String, mapTo value: T) -> DialogAction<T> {
         .default(title: title, flatMapTo: Observable.just(value))

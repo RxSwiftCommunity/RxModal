@@ -3,17 +3,20 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 51;
+	objectVersion = 52;
 	objects = {
 
 /* Begin PBXBuildFile section */
 		1B0BC9AB78EE118468A1EC67 /* Pods_RxModalExample.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 89B5467EFFDD600E8E0ECDA2 /* Pods_RxModalExample.framework */; };
 		7580E40325CB49A800F9A0A7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7580E40225CB49A800F9A0A7 /* AppDelegate.swift */; };
 		7580E40525CB49A800F9A0A7 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7580E40425CB49A800F9A0A7 /* SceneDelegate.swift */; };
-		7580E40725CB49A800F9A0A7 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7580E40625CB49A800F9A0A7 /* ViewController.swift */; };
+		7580E40725CB49A800F9A0A7 /* FlowsListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7580E40625CB49A800F9A0A7 /* FlowsListViewController.swift */; };
 		7580E40A25CB49A800F9A0A7 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7580E40825CB49A800F9A0A7 /* Main.storyboard */; };
 		7580E40C25CB49A900F9A0A7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7580E40B25CB49A900F9A0A7 /* Assets.xcassets */; };
 		7580E40F25CB49A900F9A0A7 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7580E40D25CB49A900F9A0A7 /* LaunchScreen.storyboard */; };
+		75D9706325D5438900EECC2B /* Splash in Frameworks */ = {isa = PBXBuildFile; productRef = 75D9706225D5438900EECC2B /* Splash */; };
+		75D9706625D5716000EECC2B /* FlowDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75D9706525D5716000EECC2B /* FlowDetailViewController.swift */; };
+		75D9706925D571C600EECC2B /* Flow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75D9706825D571C600EECC2B /* Flow.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -21,12 +24,14 @@
 		7580E3FF25CB49A800F9A0A7 /* RxModalExample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RxModalExample.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7580E40225CB49A800F9A0A7 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		7580E40425CB49A800F9A0A7 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		7580E40625CB49A800F9A0A7 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		7580E40625CB49A800F9A0A7 /* FlowsListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlowsListViewController.swift; sourceTree = "<group>"; };
 		7580E40925CB49A800F9A0A7 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		7580E40B25CB49A900F9A0A7 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		7580E40E25CB49A900F9A0A7 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		7580E41025CB49A900F9A0A7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		75BA90C325CED7BA00AF94E6 /* RxModalExample.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = RxModalExample.entitlements; sourceTree = "<group>"; };
+		75D9706525D5716000EECC2B /* FlowDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlowDetailViewController.swift; sourceTree = "<group>"; };
+		75D9706825D571C600EECC2B /* Flow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Flow.swift; sourceTree = "<group>"; };
 		89B5467EFFDD600E8E0ECDA2 /* Pods_RxModalExample.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_RxModalExample.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A8FF776624B518F974CE128B /* Pods-RxModalExample.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RxModalExample.debug.xcconfig"; path = "Target Support Files/Pods-RxModalExample/Pods-RxModalExample.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -37,6 +42,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				1B0BC9AB78EE118468A1EC67 /* Pods_RxModalExample.framework in Frameworks */,
+				75D9706325D5438900EECC2B /* Splash in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -76,7 +82,9 @@
 				75BA90C325CED7BA00AF94E6 /* RxModalExample.entitlements */,
 				7580E40225CB49A800F9A0A7 /* AppDelegate.swift */,
 				7580E40425CB49A800F9A0A7 /* SceneDelegate.swift */,
-				7580E40625CB49A800F9A0A7 /* ViewController.swift */,
+				75D9706825D571C600EECC2B /* Flow.swift */,
+				7580E40625CB49A800F9A0A7 /* FlowsListViewController.swift */,
+				75D9706525D5716000EECC2B /* FlowDetailViewController.swift */,
 				7580E40825CB49A800F9A0A7 /* Main.storyboard */,
 				7580E40B25CB49A900F9A0A7 /* Assets.xcassets */,
 				7580E40D25CB49A900F9A0A7 /* LaunchScreen.storyboard */,
@@ -111,6 +119,9 @@
 			dependencies = (
 			);
 			name = RxModalExample;
+			packageProductDependencies = (
+				75D9706225D5438900EECC2B /* Splash */,
+			);
 			productName = RxModalExample;
 			productReference = 7580E3FF25CB49A800F9A0A7 /* RxModalExample.app */;
 			productType = "com.apple.product-type.application";
@@ -138,6 +149,9 @@
 				Base,
 			);
 			mainGroup = 7580E3F625CB49A800F9A0A7;
+			packageReferences = (
+				75D9706125D5438900EECC2B /* XCRemoteSwiftPackageReference "Splash" */,
+			);
 			productRefGroup = 7580E40025CB49A800F9A0A7 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -207,9 +221,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7580E40725CB49A800F9A0A7 /* ViewController.swift in Sources */,
+				7580E40725CB49A800F9A0A7 /* FlowsListViewController.swift in Sources */,
+				75D9706925D571C600EECC2B /* Flow.swift in Sources */,
 				7580E40325CB49A800F9A0A7 /* AppDelegate.swift in Sources */,
 				7580E40525CB49A800F9A0A7 /* SceneDelegate.swift in Sources */,
+				75D9706625D5716000EECC2B /* FlowDetailViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -421,6 +437,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		75D9706125D5438900EECC2B /* XCRemoteSwiftPackageReference "Splash" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/JohnSundell/Splash";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.15.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		75D9706225D5438900EECC2B /* Splash */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 75D9706125D5438900EECC2B /* XCRemoteSwiftPackageReference "Splash" */;
+			productName = Splash;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 7580E3F725CB49A800F9A0A7 /* Project object */;
 }

@@ -22,9 +22,9 @@ extension DialogActionStyle {
 }
 
 extension DialogAction {
-    fileprivate func makeAlertAction(observer: AnyObserver<Observable<T>>) -> UIAlertAction {
+    fileprivate func makeAlertAction(observer: AnyObserver<Observable<T>>, textFields: @escaping () -> [UITextField]) -> UIAlertAction {
         UIAlertAction(title: title, style: style.alertActionStyle) { _ in
-            observer.onNext(self.onNext)
+            observer.onNext(self.onNext(textFields()))
             observer.onCompleted()
         }
     }
@@ -47,9 +47,15 @@ extension Dialog {
                 controller.popoverPresentationController?.barButtonItem = item
             }
         }
+        
+        for textField in textFields {
+            controller.addTextField(configurationHandler: textField.configuration)
+        }
 
         for action in actions {
-            let alertAction = action.makeAlertAction(observer: observer)
+            let alertAction = action.makeAlertAction(observer: observer) { [unowned controller] in
+                controller.textFields ?? []
+            }
             controller.addAction(alertAction)
             if action.isPreferred {
                 controller.preferredAction = alertAction
@@ -79,19 +85,10 @@ extension RxModal {
         presenter: Presenter = .keyWindow,
         title: String? = nil,
         message: String? = nil,
-        actions: DialogAction<T>...
-    ) -> Observable<T> {
-        present(.alert, presenter: presenter, title: title, message: message, actions: actions)
-    }
-
-    public static func alert<T>(
-        _ type: T.Type = T.self,
-        presenter: Presenter = .keyWindow,
-        title: String? = nil,
-        message: String? = nil,
+        textFields: [DialogTextField] = [],
         actions: [DialogAction<T>]
     ) -> Observable<T> {
-        present(.alert, presenter: presenter, title: title, message: message, actions: actions)
+        present(.alert, presenter: presenter, title: title, message: message, textFields: textFields, actions: actions)
     }
 
     public static func actionSheet<T>(
@@ -100,20 +97,10 @@ extension RxModal {
         source: DialogSource,
         title: String? = nil,
         message: String? = nil,
-        actions: DialogAction<T>...
-    ) -> Observable<T> {
-        present(.actionSheet(source: source), presenter: presenter, title: title, message: message, actions: actions)
-    }
-
-    public static func actionSheet<T>(
-        _ type: T.Type = T.self,
-        presenter: Presenter = .keyWindow,
-        source: DialogSource,
-        title: String? = nil,
-        message: String? = nil,
+        textFields: [DialogTextField] = [],
         actions: [DialogAction<T>]
     ) -> Observable<T> {
-        present(.actionSheet(source: source), presenter: presenter, title: title, message: message, actions: actions)
+        present(.actionSheet(source: source), presenter: presenter, title: title, message: message, textFields: textFields, actions: actions)
     }
 
     public static func present<T>(
@@ -122,9 +109,10 @@ extension RxModal {
         presenter: Presenter = .keyWindow,
         title: String? = nil,
         message: String? = nil,
+        textFields: [DialogTextField] = [],
         actions: [DialogAction<T>]
     ) -> Observable<T> {
-        let dialog = Dialog(title: title, message: message, actions: actions)
+        let dialog = Dialog(title: title, message: message, textFields: textFields, actions: actions)
         return present( dialog, style: style, presenter: presenter)
     }
 

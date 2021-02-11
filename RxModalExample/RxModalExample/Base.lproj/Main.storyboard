@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="18121" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="18121" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="pb5-HC-2h1">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
@@ -9,72 +9,126 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--View Controller-->
-        <scene sceneID="tne-QT-ifu">
+        <!--Flow Detail View Controller-->
+        <scene sceneID="WTW-te-ZgB">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="RxModalExample" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
+                <viewController id="GFU-Xd-aGm" customClass="FlowDetailViewController" customModule="RxModalExample" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="PFC-bY-4Ph">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="DOr-z5-edE">
-                                <rect key="frame" x="0.0" y="646" width="414" height="216"/>
-                                <connections>
-                                    <outlet property="dataSource" destination="BYZ-38-t0r" id="M1w-ho-qbT"/>
-                                    <outlet property="delegate" destination="BYZ-38-t0r" id="saE-ya-pTd"/>
-                                </connections>
-                            </pickerView>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" editable="NO" textAlignment="natural" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Y07-KI-biD">
-                                <rect key="frame" x="0.0" y="0.0" width="414" height="602"/>
-                                <color key="backgroundColor" systemColor="secondarySystemBackgroundColor"/>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" text="Tap on &quot;Start&quot; to start the flow 😉" textAlignment="natural" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YbO-gi-a1R">
+                                <rect key="frame" x="0.0" y="88" width="414" height="808"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <color key="textColor" systemColor="labelColor"/>
-                                <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
-                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translucent="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0u5-CP-wF5">
-                                <rect key="frame" x="0.0" y="602" width="414" height="44"/>
-                                <items>
-                                    <barButtonItem style="plain" systemItem="flexibleSpace" id="AbF-b3-YdN"/>
-                                    <barButtonItem title="Start" id="PJs-8d-93f">
-                                        <connections>
-                                            <action selector="startFlow:" destination="BYZ-38-t0r" id="EAo-9b-fv9"/>
-                                        </connections>
-                                    </barButtonItem>
-                                </items>
-                            </toolbar>
                         </subviews>
-                        <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
+                        <viewLayoutGuide key="safeArea" id="CEp-mg-Wmz"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="DOr-z5-edE" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="IJo-b3-gRM"/>
-                            <constraint firstItem="Y07-KI-biD" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="KhF-04-Jcb"/>
-                            <constraint firstItem="0u5-CP-wF5" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="Qu8-p2-uYh"/>
-                            <constraint firstItem="0u5-CP-wF5" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="Rjl-rF-7tX"/>
-                            <constraint firstItem="DOr-z5-edE" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="UGy-5y-3Ti"/>
-                            <constraint firstItem="Y07-KI-biD" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="fbt-fq-Fh0"/>
-                            <constraint firstItem="DOr-z5-edE" firstAttribute="top" secondItem="0u5-CP-wF5" secondAttribute="bottom" id="h5D-6n-eSN"/>
-                            <constraint firstItem="Y07-KI-biD" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="oqL-fX-rnU"/>
-                            <constraint firstItem="DOr-z5-edE" firstAttribute="bottom" secondItem="6Tk-OE-BBY" secondAttribute="bottom" id="reQ-78-uc0"/>
-                            <constraint firstItem="0u5-CP-wF5" firstAttribute="top" secondItem="Y07-KI-biD" secondAttribute="bottom" id="tFc-BJ-4nc"/>
+                            <constraint firstItem="YbO-gi-a1R" firstAttribute="leading" secondItem="CEp-mg-Wmz" secondAttribute="leading" id="lKW-8x-DHN"/>
+                            <constraint firstItem="YbO-gi-a1R" firstAttribute="top" secondItem="CEp-mg-Wmz" secondAttribute="top" id="pbN-QK-Paw"/>
+                            <constraint firstItem="CEp-mg-Wmz" firstAttribute="trailing" secondItem="YbO-gi-a1R" secondAttribute="trailing" id="qD5-8f-AKQ"/>
+                            <constraint firstAttribute="bottom" secondItem="YbO-gi-a1R" secondAttribute="bottom" id="u1W-MQ-Szz"/>
                         </constraints>
                     </view>
+                    <toolbarItems/>
+                    <navigationItem key="navigationItem" id="KFQ-cE-F83"/>
                     <connections>
-                        <outlet property="flowOutputTextView" destination="Y07-KI-biD" id="eM4-3t-JLh"/>
-                        <outlet property="flowPicker" destination="DOr-z5-edE" id="5aR-Tm-lyD"/>
-                        <outlet property="startBarButtonItem" destination="PJs-8d-93f" id="kXY-rE-1BL"/>
+                        <outlet property="flowOutputTextView" destination="YbO-gi-a1R" id="Zqk-gG-oFq"/>
+                        <outlet property="startBarButtonItem" destination="hCV-ja-rVg" id="wBp-i8-fmW"/>
                     </connections>
                 </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="9Xn-XT-f2F" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <barButtonItem title="Start" id="hCV-ja-rVg">
+                    <connections>
+                        <action selector="startFlow:" destination="GFU-Xd-aGm" id="itT-EX-uOY"/>
+                    </connections>
+                </barButtonItem>
             </objects>
-            <point key="canvasLocation" x="18.840579710144929" y="107.8125"/>
+            <point key="canvasLocation" x="-159.42028985507247" y="1518.75"/>
+        </scene>
+        <!--RxModal-->
+        <scene sceneID="JRo-Z0-MUc">
+            <objects>
+                <tableViewController clearsSelectionOnViewWillAppear="NO" id="uo0-n8-2Q5" customClass="FlowsListViewController" customModule="RxModalExample" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="insetGrouped" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" id="4cs-FB-Bcl">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="Cell" id="sBy-tz-5SW" customClass="FlowCell" customModule="RxModalExample" customModuleProvider="target">
+                                <rect key="frame" x="20" y="49.5" width="374" height="43.5"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="sBy-tz-5SW" id="FRa-5y-gDL">
+                                    <rect key="frame" x="0.0" y="0.0" width="374" height="43.5"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </tableViewCellContentView>
+                                <connections>
+                                    <segue destination="DVU-at-omW" kind="showDetail" id="BlI-iM-CMp"/>
+                                </connections>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="uo0-n8-2Q5" id="jrg-ej-kfG"/>
+                            <outlet property="delegate" destination="uo0-n8-2Q5" id="FAt-hm-ANK"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" title="RxModal" id="fwY-cb-lmM"/>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="XJl-4a-Jag" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-159" y="694"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="qfS-Qr-HnP">
+            <objects>
+                <navigationController id="Zqh-1U-tE0" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="N3Q-ng-oqh">
+                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="uo0-n8-2Q5" kind="relationship" relationship="rootViewController" id="0Mu-Y7-v4T"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="qMJ-YW-5fQ" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-1086" y="694"/>
+        </scene>
+        <!--Split View Controller-->
+        <scene sceneID="3rL-3x-hwa">
+            <objects>
+                <splitViewController allowDoubleColumnStyle="YES" id="pb5-HC-2h1" sceneMemberID="viewController">
+                    <connections>
+                        <segue destination="Zqh-1U-tE0" kind="relationship" relationship="masterViewController" id="9Ix-Az-A5M"/>
+                    </connections>
+                </splitViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Yz7-FF-r3J" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-2070" y="887"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="iCL-T3-zQH">
+            <objects>
+                <navigationController id="DVU-at-omW" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="iP5-qs-Bmb">
+                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="GFU-Xd-aGm" kind="relationship" relationship="rootViewController" id="YrD-U6-UGB"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="gT8-he-qov" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="507" y="1195"/>
         </scene>
     </scenes>
     <resources>
         <systemColor name="labelColor">
             <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-        </systemColor>
-        <systemColor name="secondarySystemBackgroundColor">
-            <color red="0.94901960784313721" green="0.94901960784313721" blue="0.96862745098039216" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
