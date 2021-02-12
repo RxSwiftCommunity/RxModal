@@ -5,7 +5,7 @@
 //  Created by Jérôme Alves on 06/02/2021.
 //
 
-import Foundation
+import UIKit
 
 public protocol RxModalCustomStringConvertible {
     var rxModalDescription: String { get }

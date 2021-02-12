@@ -6,6 +6,7 @@
 //
 
 #if canImport(MediaPlayer)
+import UIKit
 import MediaPlayer
 import RxSwift
 import RxCocoa

@@ -6,6 +6,7 @@
 //
 
 #if canImport(PhotosUI)
+import UIKit
 import PhotosUI
 import RxSwift
 import RxCocoa

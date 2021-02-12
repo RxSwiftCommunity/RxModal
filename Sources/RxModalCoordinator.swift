@@ -5,7 +5,7 @@
 //  Created by Jérôme Alves on 05/02/2021.
 //
 
-import Foundation
+import UIKit
 import RxSwift
 
 public class RxModalCoordinator<ViewController: UIViewController>: NSObject, _RxModalCoordinator {

@@ -6,7 +6,7 @@
 //
 
 #if canImport(MessageUI)
-import Foundation
+import UIKit
 import MessageUI
 import RxSwift
 

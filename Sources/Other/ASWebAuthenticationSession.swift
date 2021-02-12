@@ -5,7 +5,7 @@
 //  Created by Jérôme Alves on 10/02/2021.
 //
 
-import Foundation
+import UIKit
 import AuthenticationServices
 import RxSwift
 
