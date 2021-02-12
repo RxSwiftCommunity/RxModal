@@ -48,7 +48,7 @@
                     </connections>
                 </barButtonItem>
             </objects>
-            <point key="canvasLocation" x="-159.42028985507247" y="1518.75"/>
+            <point key="canvasLocation" x="1703" y="694"/>
         </scene>
         <!--RxModal-->
         <scene sceneID="JRo-Z0-MUc">
@@ -107,7 +107,7 @@
                 </splitViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Yz7-FF-r3J" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-2070" y="887"/>
+            <point key="canvasLocation" x="-2106" y="694"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="iCL-T3-zQH">
@@ -123,7 +123,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="gT8-he-qov" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="507" y="1195"/>
+            <point key="canvasLocation" x="822" y="694"/>
         </scene>
     </scenes>
     <resources>

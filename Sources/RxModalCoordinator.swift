@@ -8,34 +8,43 @@
 import Foundation
 import RxSwift
 
-public class RxModalCoordinator: NSObject, Disposable {
-    public private(set) var controller: UIViewController?
+public class RxModalCoordinator<ViewController: UIViewController>: NSObject, _RxModalCoordinator {
+    private var _viewController: ViewController?
+    public var viewController: ViewController {
+        _viewController!
+    }
     
     required public override init() {}
     
-    fileprivate func present(_ controller: @autoclosure () -> UIViewController, with presenter: Presenter) throws {
+    public func present(_ controller: @autoclosure () -> ViewController, with presenter: Presenter) throws {
         guard let presenter = presenter() else {
             throw RxModalError.missingPresenter
         }
-        self.controller = controller()
-        presenter.present(self.controller!, animated: true, completion: nil)
+        _viewController = controller()
+        presenter.present(viewController, animated: true, completion: nil)
     }
     
     public func dispose() {
-        guard let controller = controller, controller.isBeingDismissed == false else {
+        guard viewController.isBeingDismissed == false else {
             return
         }
-        controller.presentingViewController?.dismiss(animated: true, completion: nil)
+        viewController.presentingViewController?.dismiss(animated: true, completion: nil)
     }
 }
 
-extension NSObjectProtocol where Self: RxModalCoordinator {
+public protocol _RxModalCoordinator: AnyObject, Disposable {
+    init()
+    associatedtype ViewController: UIViewController
+    func present(_ controller: @autoclosure () -> ViewController, with presenter: Presenter) throws
+}
+
+extension NSObjectProtocol where Self: _RxModalCoordinator {
     
     //MARK: - Completable
     
-    public static func present<VC: UIViewController>(
+    public static func present(
         using presenter: Presenter,
-        controllerFactory: @escaping (Self) -> VC,
+        controllerFactory: @escaping (Self) -> Self.ViewController,
         sequence: @escaping (Self) -> Completable
     ) -> Completable {
         Completable.using {
@@ -51,9 +60,9 @@ extension NSObjectProtocol where Self: RxModalCoordinator {
 
     //MARK: - Single
     
-    public static func present<VC: UIViewController, T>(
+    public static func present<T>(
         using presenter: Presenter,
-        controllerFactory: @escaping (Self) -> VC,
+        controllerFactory: @escaping (Self) -> Self.ViewController,
         sequence: @escaping (Self) -> Single<T>
     ) -> Single<T> {
         Single.using {
@@ -68,9 +77,9 @@ extension NSObjectProtocol where Self: RxModalCoordinator {
 
     //MARK: - Maybe
 
-    public static func present<VC: UIViewController, T>(
+    public static func present<T>(
         using presenter: Presenter,
-        controllerFactory: @escaping (Self) -> VC,
+        controllerFactory: @escaping (Self) -> Self.ViewController,
         sequence: @escaping (Self) -> Maybe<T>
     ) -> Maybe<T> {
         Maybe.using {
@@ -85,9 +94,9 @@ extension NSObjectProtocol where Self: RxModalCoordinator {
 
     //MARK: - Observable
 
-    public static func present<VC: UIViewController, T>(
+    public static func present<T>(
         using presenter: Presenter,
-        controllerFactory: @escaping (Self) -> VC,
+        controllerFactory: @escaping (Self) -> Self.ViewController,
         sequence: @escaping (Self) -> Observable<T>
     ) -> Observable<T> {
         Observable.using {

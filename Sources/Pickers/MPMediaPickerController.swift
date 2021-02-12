@@ -45,7 +45,7 @@ extension RxModal {
     }
 }
 
-private class MPMediaPickerControllerCoordinator: RxModalCoordinator, MPMediaPickerControllerDelegate {
+private class MPMediaPickerControllerCoordinator: RxModalCoordinator<MPMediaPickerController>, MPMediaPickerControllerDelegate {
     required init() {}
 
     let subject = PublishSubject<MPMediaItemCollection>()

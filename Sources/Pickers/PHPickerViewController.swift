@@ -24,7 +24,7 @@ extension RxModal {
 }
 
 @available(iOS 14, *)
-private class PHPickerViewControllerCoordinator: RxModalCoordinator, PHPickerViewControllerDelegate {
+private class PHPickerViewControllerCoordinator: RxModalCoordinator<PHPickerViewController>, PHPickerViewControllerDelegate {
     required init() {}
 
     let pickerResults = PublishSubject<[PHPickerResult]>()

@@ -35,6 +35,44 @@ public struct DialogTextField {
     public init(configuration: @escaping (UITextField) -> () = { _ in }) {
         self.configuration = configuration
     }
+    
+    public static func email(configuration: @escaping (UITextField) -> () = { _ in }) -> DialogTextField {
+        DialogTextField {
+            if #available(iOS 10.0, *) {
+                $0.textContentType = .emailAddress
+            }
+            $0.keyboardType = .emailAddress
+            $0.autocapitalizationType = .none
+            $0.spellCheckingType = .no
+            configuration($0)
+        }
+    }
+
+    public static func password(configuration: @escaping (UITextField) -> () = { _ in }) -> DialogTextField {
+        DialogTextField {
+            if #available(iOS 11.0, *) {
+                $0.textContentType = .password
+            }
+            $0.isSecureTextEntry = true
+            $0.autocapitalizationType = .none
+            $0.autocorrectionType = .no
+            $0.spellCheckingType = .no
+            configuration($0)
+        }
+    }
+
+    public static func phoneNumber(configuration: @escaping (UITextField) -> () = { _ in }) -> DialogTextField {
+        DialogTextField {
+            if #available(iOS 11.0, *) {
+                $0.textContentType = .telephoneNumber
+            }
+            $0.keyboardType = .phonePad
+            $0.autocapitalizationType = .none
+            $0.autocorrectionType = .no
+            $0.spellCheckingType = .no
+            configuration($0)
+        }
+    }
 }
 
 public struct DialogAction<T> {
@@ -153,4 +191,35 @@ public struct DialogAction<T> {
             isPreferred: true
         )
     }
+}
+
+extension DialogAction where T == Void {
+    // MARK: - flatMap with TextFields
+
+    public static func `default`<O: ObservableConvertibleType>(title: String, flatMap observable: @escaping ([UITextField]) -> O) -> DialogAction<Void> {
+        DialogAction(title: title, style: .default, onNext: { observable($0).asObservable().map { _ in () } })
+    }
+
+    public static func cancel<O: ObservableConvertibleType>(title: String, flatMap observable: @escaping ([UITextField]) -> O) -> DialogAction<Void> {
+        DialogAction(title: title, style: .cancel, onNext: { observable($0).asObservable().map { _ in () } })
+    }
+
+    public static func destructive<O: ObservableConvertibleType>(title: String, flatMap observable: @escaping ([UITextField]) -> O) -> DialogAction<Void> {
+        DialogAction(title: title, style: .destructive, onNext: { observable($0).asObservable().map { _ in () } })
+    }
+
+    // MARK: -  flatMapTo without TextFields
+
+    public static func `default`<O: ObservableConvertibleType>(title: String, flatMapTo observable: O) -> DialogAction<Void> {
+        DialogAction(title: title, style: .default, onNext: { _ in observable.asObservable().map { _ in () } })
+    }
+
+    public static func cancel<O: ObservableConvertibleType>(title: String, flatMapTo observable: O) -> DialogAction<Void> {
+        DialogAction(title: title, style: .cancel, onNext: { _ in observable.asObservable().map { _ in () } })
+    }
+
+    public static func destructive<O: ObservableConvertibleType>(title: String, flatMapTo observable: O) -> DialogAction<Void> {
+        DialogAction(title: title, style: .destructive, onNext: { _ in observable.asObservable().map { _ in () } })
+    }
+
 }

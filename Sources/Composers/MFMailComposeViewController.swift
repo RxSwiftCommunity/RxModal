@@ -29,7 +29,7 @@ extension RxModal {
     }
 }
 
-private class MFMailComposeViewControllerCoordinator: RxModalCoordinator, MFMailComposeViewControllerDelegate {
+private class MFMailComposeViewControllerCoordinator: RxModalCoordinator<MFMailComposeViewController>, MFMailComposeViewControllerDelegate {
     required init() {}
 
     let composerResult = PublishSubject<MFMailComposeResult>()

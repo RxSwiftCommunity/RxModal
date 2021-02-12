@@ -29,7 +29,7 @@ extension RxModal {
     }
 }
 
-private class MFMessageComposeViewControllerCoordinator: RxModalCoordinator, MFMessageComposeViewControllerDelegate {
+private class MFMessageComposeViewControllerCoordinator: RxModalCoordinator<MFMessageComposeViewController>, MFMessageComposeViewControllerDelegate {
     required init() {}
 
     let composerResult = PublishSubject<MessageComposeResult>()

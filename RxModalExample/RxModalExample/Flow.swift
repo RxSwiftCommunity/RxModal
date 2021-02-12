@@ -86,6 +86,42 @@ struct Flow {
                     """
                 }
             },
+            Flow("Composer Chooser") { sender in
+                RxModal.actionSheet(
+                    source: .barButtonItem(sender),
+                    title: "Contact Us",
+                    actions: [
+                        .default(title: "Mail", flatMapTo: RxModal.mailComposer {
+                            $0.setToRecipients(["rxmodal@rxswiftcommunity.org"])
+                            $0.setMessageBody("Hello World!", isHTML: false)
+                        }),
+                        .default(title: "Message", flatMapTo: RxModal.messageComposer {
+                            $0.recipients = ["0639981337"]
+                            $0.body = "Hello World!"
+                        }),
+                        .cancel(title: "Cancel")
+                    ]
+                )
+            },
+            Flow("Sign In alert") {
+                RxModal.alert(
+                    title: "Sign in",
+                    message: "Please sign in using your credentials",
+                    textFields: [
+                        DialogTextField.email { $0.placeholder = "e-mail" },
+                        DialogTextField.password { $0.placeholder = "password" }
+                    ],
+                    actions: [
+                        .cancel(title: "Cancel"),
+                        .default(title: "Sign In") { textFields in
+                            Credentials(
+                                email: textFields[0].text ?? "",
+                                password: textFields[1].text ?? ""
+                            )
+                        },
+                    ]
+                )
+            }
         ]
         
         if #available(macCatalyst 12, *) {
@@ -138,4 +174,9 @@ enum AlertResult {
 
 enum WebSessionError: Error {
     case missingClientID
+}
+
+struct Credentials {
+    let email: String
+    let password: String
 }

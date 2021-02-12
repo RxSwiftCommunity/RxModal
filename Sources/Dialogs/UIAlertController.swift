@@ -48,8 +48,10 @@ extension Dialog {
             }
         }
         
-        for textField in textFields {
-            controller.addTextField(configurationHandler: textField.configuration)
+        if case .alert = style {
+            for textField in textFields {
+                controller.addTextField(configurationHandler: textField.configuration)
+            }
         }
 
         for action in actions {
@@ -97,10 +99,9 @@ extension RxModal {
         source: DialogSource,
         title: String? = nil,
         message: String? = nil,
-        textFields: [DialogTextField] = [],
         actions: [DialogAction<T>]
     ) -> Observable<T> {
-        present(.actionSheet(source: source), presenter: presenter, title: title, message: message, textFields: textFields, actions: actions)
+        present(.actionSheet(source: source), presenter: presenter, title: title, message: message, actions: actions)
     }
 
     public static func present<T>(
@@ -121,7 +122,7 @@ extension RxModal {
         style: DialogStyle,
         presenter: Presenter = .keyWindow
     ) -> Observable<T> {
-        UIAlertControllerCoordinator<T>.present(using: presenter) { coordinator in
+        UIAlertControllerCoordinator.present(using: presenter) { coordinator in
             dialog.makeAlertController(style: style, observer: coordinator.result.asObserver())
         } sequence: { coordinator in
             coordinator.result.merge()
@@ -129,9 +130,7 @@ extension RxModal {
     }
 }
 
-private class UIAlertControllerCoordinator<T>: RxModalCoordinator {
+private class UIAlertControllerCoordinator<T>: RxModalCoordinator<UIAlertController> {
     required init() {}
     let result = PublishSubject<Observable<T>>()
 }
-
-
