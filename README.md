@@ -189,8 +189,9 @@ extension RxModal {
         configuration: @escaping (MyModalViewController) -> Void
     ) -> Single<MyResult> {
         
-        MyModalViewControllerCoordinator.present(using: presenter) { _ in
+        MyModalViewControllerCoordinator.present(using: presenter) { coordinator in
             let modal = MyModalViewController()
+            modal.delegate = coordinator
             configuration(modal)
             return modal
         } sequence: {
