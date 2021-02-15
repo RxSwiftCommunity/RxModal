@@ -124,34 +124,34 @@ struct Flow {
             }
         ]
         
-        if #available(macCatalyst 12, *) {
-            // OAuth playgrounds seem to work only on macOS 🤷🏻‍♂️
-            flows.append(
-                Flow("Web Session") { () -> Single<URL> in
-                    RxModal.alert(
-                        String?.self,
-                        title: "Client ID",
-                        message: "You must register a playground client on oauth.com first",
-                        textFields: [DialogTextField { $0.placeholder = "CLIENT ID" }],
-                        actions: [
-                            .cancel(title: "Cancel", throw: WebSessionError.missingClientID),
-                            .default(title: "Register New Client", mapTo: nil),
-                            .preferred(.default(title: "Continue", map: { $0.first?.text })),
-                        ])
-                        .asSingle()
-                        .flatMap { clientID in
-                            guard let clientID = clientID else {
-                                UIApplication.shared.open(URL(string: "https://www.oauth.com/playground/client-registration.html")!)
-                                throw WebSessionError.missingClientID
-                            }
-                            return RxModal.webAuthenticationSession(
-                                url: URL(string: "https://www.oauth.com/playground/auth-dialog.html?response_type=token&client_id=\(clientID)&redirect_uri=rx-modal-example://&scope=photo&state=NESR37xhi7JGQ6xI")!,
-                                callbackURLScheme: "rx-modal-example"
-                            )
+        #if targetEnvironment(macCatalyst)
+        // OAuth playgrounds seem to work only on macOS 🤷🏻‍♂️
+        flows.append(
+            Flow("Web Session") { () -> Single<URL> in
+                RxModal.alert(
+                    String?.self,
+                    title: "Client ID",
+                    message: "You must register a playground client on oauth.com first",
+                    textFields: [DialogTextField { $0.placeholder = "CLIENT ID" }],
+                    actions: [
+                        .cancel(title: "Cancel", throw: WebSessionError.missingClientID),
+                        .default(title: "Register New Client", mapTo: nil),
+                        .preferred(.default(title: "Continue", map: { $0.first?.text })),
+                    ])
+                    .asSingle()
+                    .flatMap { clientID in
+                        guard let clientID = clientID else {
+                            UIApplication.shared.open(URL(string: "https://www.oauth.com/playground/client-registration.html")!)
+                            throw WebSessionError.missingClientID
                         }
-                }
-            )
-        }
+                        return RxModal.webAuthenticationSession(
+                            url: URL(string: "https://www.oauth.com/playground/auth-dialog.html?response_type=token&client_id=\(clientID)&redirect_uri=rx-modal-example://&scope=photo&state=NESR37xhi7JGQ6xI")!,
+                            callbackURLScheme: "rx-modal-example"
+                        )
+                    }
+            }
+        )
+        #endif
         
         if #available(iOS 14, *) {
             flows.append(
