@@ -8,7 +8,7 @@
 import UIKit
 import RxSwift
 
-public class RxModalCoordinator<ViewController: UIViewController>: NSObject, _RxModalCoordinator {
+open class RxModalCoordinator<ViewController: UIViewController>: NSObject, Disposable {
     private var _viewController: ViewController?
     public var viewController: ViewController {
         _viewController!
@@ -16,7 +16,7 @@ public class RxModalCoordinator<ViewController: UIViewController>: NSObject, _Rx
     
     required public override init() {}
     
-    public func present(_ controller: @autoclosure () -> ViewController, with presenter: Presenter) throws {
+    open func present(_ controller: @autoclosure () -> ViewController, with presenter: Presenter) throws {
         guard let presenter = presenter() else {
             throw RxModalError.missingPresenter
         }
@@ -24,7 +24,7 @@ public class RxModalCoordinator<ViewController: UIViewController>: NSObject, _Rx
         presenter.present(viewController, animated: true, completion: nil)
     }
     
-    public func dispose() {
+    open func dispose() {
         guard viewController.isBeingDismissed == false else {
             return
         }
@@ -32,21 +32,15 @@ public class RxModalCoordinator<ViewController: UIViewController>: NSObject, _Rx
     }
 }
 
-public protocol _RxModalCoordinator: AnyObject, Disposable {
-    init()
-    associatedtype ViewController: UIViewController
-    func present(_ controller: @autoclosure () -> ViewController, with presenter: Presenter) throws
-}
-
-extension NSObjectProtocol where Self: _RxModalCoordinator {
+extension NSObjectProtocol {
     
     //MARK: - Completable
     
-    public static func present(
-        using presenter: Presenter,
-        controllerFactory: @escaping (Self) -> Self.ViewController,
+    public static func present<ViewController>(
+        using presenter: Presenter = .keyWindow,
+        controllerFactory: @escaping (Self) -> ViewController,
         sequence: @escaping (Self) -> Completable
-    ) -> Completable {
+    ) -> Completable where Self: RxModalCoordinator<ViewController> {
         Completable.using {
             let coordinator = Self.init()
             try coordinator.present(controllerFactory(coordinator), with: presenter)
@@ -60,11 +54,11 @@ extension NSObjectProtocol where Self: _RxModalCoordinator {
 
     //MARK: - Single
     
-    public static func present<T>(
-        using presenter: Presenter,
-        controllerFactory: @escaping (Self) -> Self.ViewController,
+    public static func present<ViewController, T>(
+        using presenter: Presenter = .keyWindow,
+        controllerFactory: @escaping (Self) -> ViewController,
         sequence: @escaping (Self) -> Single<T>
-    ) -> Single<T> {
+    ) -> Single<T> where Self: RxModalCoordinator<ViewController> {
         Single.using {
             let coordinator = Self.init()
             try coordinator.present(controllerFactory(coordinator), with: presenter)
@@ -77,11 +71,11 @@ extension NSObjectProtocol where Self: _RxModalCoordinator {
 
     //MARK: - Maybe
 
-    public static func present<T>(
-        using presenter: Presenter,
-        controllerFactory: @escaping (Self) -> Self.ViewController,
+    public static func present<ViewController, T>(
+        using presenter: Presenter = .keyWindow,
+        controllerFactory: @escaping (Self) -> ViewController,
         sequence: @escaping (Self) -> Maybe<T>
-    ) -> Maybe<T> {
+    ) -> Maybe<T> where Self: RxModalCoordinator<ViewController> {
         Maybe.using {
             let coordinator = Self.init()
             try coordinator.present(controllerFactory(coordinator), with: presenter)
@@ -94,11 +88,11 @@ extension NSObjectProtocol where Self: _RxModalCoordinator {
 
     //MARK: - Observable
 
-    public static func present<T>(
-        using presenter: Presenter,
-        controllerFactory: @escaping (Self) -> Self.ViewController,
+    public static func present<ViewController, T>(
+        using presenter: Presenter = .keyWindow,
+        controllerFactory: @escaping (Self) -> ViewController,
         sequence: @escaping (Self) -> Observable<T>
-    ) -> Observable<T> {
+    ) -> Observable<T> where Self: RxModalCoordinator<ViewController> {
         Observable.using {
             let coordinator = Self.init()
             try coordinator.present(controllerFactory(coordinator), with: presenter)

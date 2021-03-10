@@ -2,7 +2,7 @@ PODS:
   - RxCocoa (6.0.0):
     - RxRelay (= 6.0.0)
     - RxSwift (= 6.0.0)
-  - RxModal (1.0.0):
+  - RxModal (1.0.1):
     - RxCocoa (~> 6.0)
     - RxSwift (~> 6.0)
   - RxRelay (6.0.0):
@@ -24,10 +24,10 @@ EXTERNAL SOURCES:
 
 SPEC CHECKSUMS:
   RxCocoa: 3f79328fafa3645b34600f37c31e64c73ae3a80e
-  RxModal: f8c0068c5a035a7896cb365dbb4337dd9db82902
+  RxModal: abfd791d24d9bba2539d6fe1f1a179dba8170e1d
   RxRelay: 8d593be109c06ea850df027351beba614b012ffb
   RxSwift: c14e798c59b9f6e9a2df8fd235602e85cc044295
 
 PODFILE CHECKSUM: 57ce72de39d50c403818fe31c9311026bd4a55fe
 
-COCOAPODS: 1.10.0
+COCOAPODS: 1.10.1
