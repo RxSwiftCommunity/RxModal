@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name         = "RxModal"
-  s.version      = "1.0.1"
+  s.version      = "1.0.2"
   s.summary      = "Subscribe to your modal flows"
   s.description  = <<-DESC
     RxModal helps you handle any modal flow as a simple Observable sequence.
